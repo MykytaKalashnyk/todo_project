@@ -1,0 +1,14 @@
+<h1>Список задач</h1>
+<form action="{% url 'add_task' %}" method="post">
+    {% csrf_token %}
+    <label for="task-input">Добавить задачу:</label>
+    <input type="text" id="task-input" name="title" placeholder="Введите задачу">
+</form>
+<div class="filter">
+    <label for="filter">Фильтр:</label>
+    <select id="filter">
+        <option value="all">Все задачи</option>
+        <option value="completed">Выполненные</option>
+        <option value="not-completed">Не выполненные</option>
+    </select>
+</div>

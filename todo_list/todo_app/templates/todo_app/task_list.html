@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Список задач
+{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+    {% include 'todo_app/include/header.html' %}
+    <div class="task-list">
+        {% for task in task_list %}
+        <div class="task-list__item">
+            <div class="task-list__content">
+                <ul id="task-list">
+                    <li>
+                        <span class="task-name">{{task.title}}</span>
+                        <span class="due-date">{{task.create_at}}</span>
+                        <span class="status">
+                {% if task.status %}
+                Выполнено
+                {% else %}
+                Не выполнено
+                {% endif %}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="task-list__buttons">
+                <form action="{% url 'update_status' pk=task.id %}" method="get">
+                    <button type="submit" class="update-status">Обновить статус</button>
+                </form>
+                <form action="{% url 'delete_task' pk=task.id %}" method="get">
+                    <button type="submit" class="delete">Удалить</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
